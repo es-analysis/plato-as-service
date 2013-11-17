@@ -1,0 +1,45 @@
+{
+    "author" : "Mikhail Davydov <i@azproduction.ru>",
+    "description" : "Web-Service for plato - JavaScript source code visualization, static analysis, and complexity tool",
+    "name" : "plato-as-service",
+    "version" : "0.1.0",
+    "contributors" : [
+        {
+            "name": "Mikhail Davydov",
+            "email": "i@azproduction.ru"
+        }
+    ],
+    "engines" : {
+        "node": ">= 0.10.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/azproduction/plato-as-service.git"
+    },
+    "dependencies" : {
+        "tmp": "*",
+        "plato": "*",
+        "unzip": "*",
+        "request": "*",
+        "vow": "*",
+        "susanin": "*",
+        "rm-r": "*",
+        "glob": "*",
+        "mkdirp": "*"
+    },
+    "devDependencies" : {
+        "jshint": "2.1.3",
+        "mocha": "1.11.0",
+        "jscs": "1.0.0",
+        "istanbul": "0.1.39",
+        "chai": "*",
+        "mocha-istanbul": "*",
+        "coveralls": "*"
+    },
+    "scripts": {
+        "test" : "make validate",
+        "lint": "make lint",
+        "coverage": "make coverage",
+        "clean": "make clean"
+    }
+}
