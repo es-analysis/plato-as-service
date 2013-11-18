@@ -5,12 +5,6 @@ var fs = require('fs'),
     Route = require('susanin').Route,
     ReportGenerator = require('../../lib/report');
 
-var reportGenerator = new ReportGenerator({
-    hostname: 'github.com',
-    reports: path.join(__dirname, '..', '..', 'reports'),
-    ttl: 60 * 15 * 1000
-});
-
 var serviceRoute = new Route({
     pattern: '/<user>/<repo>/<branch>/',
     defaults: {
@@ -19,12 +13,14 @@ var serviceRoute = new Route({
 });
 
 exports.index = function (req, res, next) {
-    reportGenerator.isFresh(req.params)
+    var reportGenerator = new ReportGenerator(res.app.locals.reportSettings, req.params);
+
+    reportGenerator.isFresh()
         .then(function (isFresh) {
             if (isFresh) {
                 return;
             }
-            return reportGenerator.create(req.params);
+            return reportGenerator.create();
         })
         .progress(console.log)
         .fail(next)

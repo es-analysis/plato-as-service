@@ -13,5 +13,11 @@ npm install plato-as-service
 ## Run
 
 ```
-require('plato-as-service')().listen(8080);
+var server = require('plato-as-service');
+
+server({
+    hostname: 'github.com',
+    reports: path.join(__dirname, 'reports'),
+    ttl: 60 * 15 * 1000
+}).listen(8080);
 ```

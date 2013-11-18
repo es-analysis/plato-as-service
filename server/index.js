@@ -2,8 +2,19 @@ var express = require('express'),
     router = require('./router'),
     http = require('http');
 
-module.exports = function () {
+/**
+ * @param {Object} [reportSettings]
+ * @param {String} [reportSettings.hostname]
+ * @param {String} [reportSettings.reports]
+ * @param {Number} [reportSettings.ttl]
+ * @returns {express}
+ */
+module.exports = function (reportSettings) {
     var app = express();
+
+    app.locals({
+        reportSettings: reportSettings
+    });
 
     app.configure(function () {
         app.use(express.logger('dev'));
