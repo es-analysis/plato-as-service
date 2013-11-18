@@ -28,7 +28,8 @@
         "mkdirp": "*",
         "ignore": "*",
         "fstream": "*",
-        "express": "*"
+        "express": "*",
+        "lodash": "*"
     },
     "main": "server",
     "devDependencies" : {

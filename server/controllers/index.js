@@ -3,10 +3,13 @@ var fs = require('fs'),
     util = require('util'),
     vow = require('vow'),
     Route = require('susanin').Route,
-    isReportFresh = require('../../lib/report').isFresh,
-    cachedReport = require('../../lib/cachedReport');
+    ReportGenerator = require('../../lib/report');
 
-var REPORT_TTL = 60 * 15 * 1000;
+var reportGenerator = new ReportGenerator({
+    hostname: 'github.com',
+    reports: path.join(__dirname, '..', '..', 'reports'),
+    ttl: 60 * 15 * 1000
+});
 
 var serviceRoute = new Route({
     pattern: '/<user>/<repo>/<branch>/',
@@ -16,12 +19,12 @@ var serviceRoute = new Route({
 });
 
 exports.index = function (req, res, next) {
-    isReportFresh(req.params, REPORT_TTL)
+    reportGenerator.isFresh(req.params)
         .then(function (isFresh) {
             if (isFresh) {
                 return;
             }
-            return cachedReport(req.params);
+            return reportGenerator.create(req.params);
         })
         .progress(console.log)
         .fail(next)
