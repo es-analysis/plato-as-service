@@ -1,7 +1,7 @@
 var express = require('express'),
     indexController = require('./controllers/index');
 
-module.exports = function (app) {
+module.exports = function (app, io) {
     app.get('/', indexController.usage);
     app.get('/:user/:repo/', indexController.redirectToMaster);
     app.get('/:user/:repo/:branch/', indexController.index);
@@ -9,4 +9,5 @@ module.exports = function (app) {
     app.get('*', function (req, res) {
         res.send(404);
     });
+    io.sockets.on('connection', indexController.streamLog);
 };

@@ -29,7 +29,8 @@
         "ignore": "*",
         "fstream": "*",
         "express": "*",
-        "lodash": "*"
+        "lodash": "*",
+        "socket.io": "*"
     },
     "main": "server",
     "devDependencies" : {

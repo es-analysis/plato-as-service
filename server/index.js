@@ -19,6 +19,9 @@ var express = require('express'),
 module.exports = function (reportSettings) {
     var app = express();
 
+    var server = require('http').createServer(app),
+        io = require('socket.io').listen(server);
+
     app.locals({
         reportSettings: reportSettings
     });
@@ -31,6 +34,7 @@ module.exports = function (reportSettings) {
         app.use(express.errorHandler());
     });
 
-    router(app);
-    return app;
+    router(app, io);
+
+    return server;
 };
