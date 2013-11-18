@@ -25,7 +25,9 @@
         "susanin": "*",
         "rm-r": "*",
         "glob": "*",
-        "mkdirp": "*"
+        "mkdirp": "*",
+        "ignore": "*",
+        "fstream": "*"
     },
     "devDependencies" : {
         "jshint": "2.1.3",
