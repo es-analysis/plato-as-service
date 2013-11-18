@@ -17,10 +17,10 @@ function isReportFresh(options) {
             return promise.fulfill(false);
         }
         var now = new Date(),
-            isFresh = (+now - +stats.mtime) < REPORT_TTL;
+            isFresh = (Number(now) - Number(stats.mtime)) < REPORT_TTL;
 
         if (isFresh) {
-            promise.notify('Report is fresh. Next instrumentation ' + new Date(+stats.mtime + REPORT_TTL));
+            promise.notify('Report is fresh. Next instrumentation ' + new Date(Number(stats.mtime) + REPORT_TTL));
         }
         promise.fulfill(isFresh);
     });

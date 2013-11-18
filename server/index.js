@@ -5,7 +5,7 @@ var express = require('express'),
 var app = express();
  
 app.configure(function () {
-  app.use(express.logger('dev'));
+    app.use(express.logger('dev'));
 });
  
 app.configure('development', function(){
@@ -14,7 +14,4 @@ app.configure('development', function(){
 
 router(app);
 
-
-app.listen(8080);
- 
-console.log('localhost:8080');
+module.exports = app;
