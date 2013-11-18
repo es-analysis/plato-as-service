@@ -2,39 +2,26 @@ var fs = require('fs'),
     path = require('path'),
     util = require('util'),
     vow = require('vow'),
-    createReport = require('../../lib/createReport');
+    Route = require('susanin').Route,
+    isReportFresh = require('../../lib/report').isFresh,
+    cachedReport = require('../../lib/cachedReport');
 
-var REPORTS_DIR = path.join(__dirname, '..', '..', 'reports'),
-    REPORT_TTL = 60 * 15 * 1000;
+var REPORT_TTL = 60 * 15 * 1000;
 
-function isReportFresh(options) {
-    var promise = vow.promise();
-    var file = path.join(REPORTS_DIR, options.user, options.repo, options.branch, 'report.history.json');
-
-    fs.stat(file, function (err, stats) {
-        // file is not exists
-        if (err) {
-            return promise.fulfill(false);
-        }
-        var now = new Date(),
-            isFresh = (Number(now) - Number(stats.mtime)) < REPORT_TTL;
-
-        if (isFresh) {
-            promise.notify('Report is fresh. Next instrumentation ' + new Date(Number(stats.mtime) + REPORT_TTL));
-        }
-        promise.fulfill(isFresh);
-    });
-
-    return promise;
-}
+var serviceRoute = new Route({
+    pattern: '/<user>/<repo>/<branch>/',
+    defaults: {
+        branch: 'master'
+    }
+});
 
 exports.index = function (req, res, next) {
-    isReportFresh(req.params)
+    isReportFresh(req.params, REPORT_TTL)
         .then(function (isFresh) {
             if (isFresh) {
                 return;
             }
-            return createReport(req.params);
+            return cachedReport(req.params);
         })
         .progress(console.log)
         .fail(next)
@@ -44,14 +31,22 @@ exports.index = function (req, res, next) {
 };
 
 exports.redirectToMaster = function (req, res) {
-    res.redirect('/' + req.params.user + '/' + req.params.repo + '/master/');
+    res.redirect(serviceRoute.build(req.params));
 };
 
 exports.usage = function (req, res) {
-    res.send(
-        '<pre>' +
-            'Usage /:user/:repo/:branch/ ' +
-            'Example <a href="/azproduction/plato-as-service/master/">/azproduction/plato-as-service/master/</a>' +
-        '</pre>'
-    );
+    var example = serviceRoute.build({
+        user: 'azproduction',
+        repo: 'plato-as-service'
+    });
+
+    var usage = serviceRoute.build({
+        user: 'user',
+        repo: 'repo',
+        branch: 'branch'
+    });
+
+    var html = util.format('<pre>Usage %s Example <a href="%s">%s</a>', usage, example, example);
+
+    res.send(html);
 };
