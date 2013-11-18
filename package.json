@@ -27,7 +27,8 @@
         "glob": "*",
         "mkdirp": "*",
         "ignore": "*",
-        "fstream": "*"
+        "fstream": "*",
+        "express": "*"
     },
     "devDependencies" : {
         "jshint": "2.1.3",
