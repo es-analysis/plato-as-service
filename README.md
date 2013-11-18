@@ -13,7 +13,5 @@ npm install plato-as-service
 ## Run
 
 ```
-require('plato-as-service')({
-    resultsRoot: './results'
-});
+require('plato-as-service')().listen(8080);
 ```
