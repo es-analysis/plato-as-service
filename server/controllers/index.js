@@ -22,6 +22,7 @@ exports.index = function (req, res, next) {
             }
             return reportGenerator.create();
         })
+        // TODO We should forward this log to user via socket.io
         .progress(console.log)
         .fail(next)
         .then(function () {

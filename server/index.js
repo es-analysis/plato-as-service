@@ -1,3 +1,10 @@
+// Ugly hack...
+if (typeof setImmediate !== 'undefined') {
+    var nt = process.nextTick;
+    delete process.nextTick;
+    process.nextTick = setImmediate;
+}
+
 var express = require('express'),
     router = require('./router'),
     http = require('http');
