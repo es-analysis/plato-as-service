@@ -1,6 +1,6 @@
 # plato-as-service
 
-Web-Service for plato - JavaScript source code visualization, static analysis, and complexity tool
+Web-Service for plato - JavaScript source code visualization, static analysis, and complexity tool. 
 
 ## Important
 
@@ -24,4 +24,7 @@ server({
     reports: __dirname + '/reports',
     ttl: 60 * 15 * 1000
 }).listen(8080);
+// then browse http://localhost:8080/you/your-repo/master/
 ```
+
+This [video](https://vimeo.com/79814043) shows the work of plato-as-service.
