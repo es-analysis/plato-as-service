@@ -23,6 +23,9 @@
                 case 'ready':
                     window.location = window.location;
                     break;
+                case 'error':
+                    log.innerHTML += 'Please, report error above. You may also <a href="' + location + '">retry</a>' + '\n';
+                    break;
             }
         }
     });

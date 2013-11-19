@@ -22,9 +22,10 @@ exports.index = function (req, res, next) {
         channelId = reportGenerator.cacheKey(),
         isPending = reportGenerator.isPending();
 
-    // create blank message channel
     if (!isPending) {
+        // create blank message channel
         messages.reset(channelId);
+        messages.addTo(channelId, {type: 'log', text: 'Generating report for ' + channelId + ' on ' + new Date()});
     }
 
     var promise = reportGenerator.isFresh()
@@ -42,10 +43,18 @@ exports.index = function (req, res, next) {
     if (!isPending) {
         promise = promise.progress(function (text) {
             messages.addTo(channelId, {type: 'log', text: text});
+        })
+        .fail(function (error) {
+            messages.addTo(channelId, {type: 'log', text: error && error.stack ? error.stack : error + ''});
+            messages.addTo(channelId, {type: 'error'});
+            throw error;
         });
     }
 
-    promise = promise.fail(next)
+    promise = promise.fail(function (error) {
+        next();
+        throw error;
+    })
     .then(function (isFresh) {
         if (isFresh) {
             next();
@@ -53,7 +62,7 @@ exports.index = function (req, res, next) {
     });
 
     if (!isPending) {
-        promise.always(function () {
+        promise.then(function () {
             messages.addTo(channelId, {type: 'log', text: 'Ready'});
             messages.addTo(channelId, {type: 'ready'});
         });
