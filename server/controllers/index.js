@@ -20,12 +20,14 @@ var messages = new BufferedMessageChannel();
 exports.index = function (req, res, next) {
     var reportGenerator = new ReportGenerator(res.app.locals.reportSettings, req.params),
         channelId = reportGenerator.cacheKey(),
-        add = messages.pipeTo(channelId);
+        isPending = reportGenerator.isPending();
 
     // create blank message channel
-    messages.create(channelId);
+    if (!isPending) {
+        messages.reset(channelId);
+    }
 
-    reportGenerator.isFresh()
+    var promise = reportGenerator.isFresh()
         .then(function (isFresh) {
             if (isFresh) {
                 return isFresh;
@@ -35,20 +37,27 @@ exports.index = function (req, res, next) {
             return reportGenerator.create().then(function () {
                 return isFresh;
             });
-        })
-        .progress(function (text) {
-            add({type: 'log', text: text});
-        })
-        .fail(next)
-        .then(function (isFresh) {
-            if (isFresh) {
-                next();
-            }
-        })
-        .always(function () {
-            add({type: 'log', text: 'Ready'});
-            add({type: 'ready'});
         });
+
+    if (!isPending) {
+        promise = promise.progress(function (text) {
+            messages.addTo(channelId, {type: 'log', text: text});
+        });
+    }
+
+    promise = promise.fail(next)
+    .then(function (isFresh) {
+        if (isFresh) {
+            next();
+        }
+    });
+
+    if (!isPending) {
+        promise.always(function () {
+            messages.addTo(channelId, {type: 'log', text: 'Ready'});
+            messages.addTo(channelId, {type: 'ready'});
+        });
+    }
 };
 
 exports.redirectToMaster = function (req, res) {
