@@ -7,12 +7,16 @@ if (typeof setImmediate !== 'undefined') {
 
 var express = require('express'),
     router = require('./router'),
+    Limiter = require('../lib/limiter'),
     http = require('http');
 
 /**
  * @param {Object} [reportSettings]
+ * @param {String} [reportSettings.badgeService]
  * @param {String} [reportSettings.hostname]
  * @param {String} [reportSettings.reports]
+ * @param {String} [reportSettings.maxConcurrent]
+ * @param {String} [reportSettings.maxConcurrentQueue]
  * @param {Number} [reportSettings.ttl]
  * @returns {express}
  */
@@ -23,7 +27,8 @@ module.exports = function (reportSettings) {
         io = require('socket.io').listen(server);
 
     app.locals({
-        reportSettings: reportSettings
+        reportSettings: reportSettings,
+        requestQueue: new Limiter(reportSettings.maxConcurrent, reportSettings.maxConcurrentQueue)
     });
 
     app.configure(function () {

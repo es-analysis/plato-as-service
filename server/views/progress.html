@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Loading...</title>
+    </head>
+<body>
+<pre id="log"></pre>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+(function (){
+    var channelId = location.pathname.split('/').slice(1, -1).join('/');
+    var socket = io.connect('http://localhost');
+    var log = document.getElementById('log');
+    socket.on('progress', function (data) {
+        for (var i = 0, c = data.length, message; i < c; i++) {
+            message = data[i];
+            switch (message.type) {
+                case 'log':
+                    log.innerHTML += message.text + '\n';
+                    // follow log
+                    window.scrollTo(0, 1e11);
+                    break;
+                case 'ready':
+                    window.location = window.location;
+                    break;
+                case 'error':
+                    log.innerHTML += 'Please, report error above. You may also <a href="' + location + '">retry</a>' + '\n';
+                    break;
+            }
+        }
+    });
+    socket.emit('join', channelId);
+})();
+</script>
+</body>
+</html>

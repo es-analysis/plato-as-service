@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Loading...</title>
+        <title>Plato as service</title>
     </head>
-<body>
-<pre id="log"></pre>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-(function (){
-    var channelId = location.pathname.split('/').slice(1, -1).join('/');
-    var socket = io.connect('http://localhost');
-    var log = document.getElementById('log');
-    socket.on('progress', function (data) {
-        for (var i = 0, c = data.length, message; i < c; i++) {
-            message = data[i];
-            switch (message.type) {
-                case 'log':
-                    log.innerHTML += message.text + '\n';
-                    // follow log
-                    window.scrollTo(0, 1e11);
-                    break;
-                case 'ready':
-                    window.location = window.location;
-                    break;
-                case 'error':
-                    log.innerHTML += 'Please, report error above. You may also <a href="' + location + '">retry</a>' + '\n';
-                    break;
-            }
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            text-align: center;
+            margin: 0;
         }
-    });
-    socket.emit('join', channelId);
-})();
-</script>
+        ul {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: left;
+            margin: 0;
+        }
+        i {
+            display: inline-block;
+            width: 0;
+            height: 100%;
+            vertical-align: middle;
+        }
+    </style>
+<body>
+    <ul>
+        <li>
+<pre>
+Plato report /%github-user%/%repo%/%branch%/
+Example <a href="/azproduction/plato-as-service/master/">/azproduction/plato-as-service/master/</a>
+</pre>
+        </li>
+        <li>
+<pre>
+Maintainability badge /%github-user%/%repo%/%branch%/maintainability.png
+Example <a href="/azproduction/plato-as-service/master/maintainability.png">/azproduction/plato-as-service/master/maintainability.png</a>
+<img src="/azproduction/plato-as-service/master/maintainability.png"/>
+</pre>
+        </li>
+        <li>
+<pre>
+Sloc badge /%github-user%/%repo%/%branch%/sloc.png
+Example <a href="/azproduction/plato-as-service/master/sloc.png">/azproduction/plato-as-service/master/sloc.png</a>
+<img src="/azproduction/plato-as-service/master/sloc.png"/>
+</pre>
+        </li>
+    </ul>
+    <i></i>
 </body>
 </html>

@@ -23,7 +23,9 @@ server({
     hostname: 'github.com',
     badgeService: 'img.shields.io',
     reports: __dirname + '/reports',
-    ttl: 60 * 15 * 1000
+    maxConcurrent: 50,                // max concurrent unzip processes
+    maxConcurrentQueue: Infinity,
+    ttl: 60 * 15 * 1000               // report ttl
 }).listen(8080);
 ```
 
