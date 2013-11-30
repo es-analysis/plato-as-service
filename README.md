@@ -27,6 +27,8 @@ server({
 }).listen(8080);
 ```
 
+![](http://habrastorage.org/storage3/19c/0f8/a91/19c0f8a911a6dceb63ed0e83077ad3c7.png)
+
 ## Url format
 
 ```
