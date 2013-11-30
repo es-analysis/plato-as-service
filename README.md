@@ -16,15 +16,23 @@ npm install plato-as-service
 
 ## Run
 
-```
+```js
 var server = require('plato-as-service');
 
 server({
     hostname: 'github.com',
+    badgeService: 'img.shields.io',
     reports: __dirname + '/reports',
     ttl: 60 * 15 * 1000
 }).listen(8080);
-// then browse http://localhost:8080/you/your-repo/master/
+```
+
+## Url format
+
+```
+/you/your-repo/master/
+/you/your-repo/master/sloc.png
+/you/your-repo/master/maintainability.png
 ```
 
 This [video](https://vimeo.com/79814043) shows the work of plato-as-service.
