@@ -13,8 +13,12 @@ module.exports = function (app, io) {
     app.get('/:user/:repo/:branch/', indexController.index);
     app.get('/:user/:repo/:branch/:badge.png', indexController.badgeCreate);
 
+    // Bower Components
+    app.get('/assets/*', express.static(__dirname + '/..'));
+
     // Static
     app.get('*', express.static(app.locals.reportSettings.reports || __dirname + '/../reports'));
+
 
     // Default action - 404
     app.get('*', function (req, res) {
