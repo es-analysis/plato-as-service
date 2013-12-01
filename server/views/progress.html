@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Processing Report...</title>
 
-    <link rel="stylesheet" href="/assets/components/foundation/css/normalize.css">
-    <link rel="stylesheet" href="/assets/components/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/components/foundation/css/normalize.css">
+    <link rel="stylesheet" href="/components/foundation/css/foundation.css">
     <link rel="stylesheet" href="/assets/css/core.css">
 
-    <script src="/assets/components/foundation/js/vendor/custom.modernizr.js"></script>
+    <script src="/components/foundation/js/vendor/custom.modernizr.js"></script>
 </head>
 <body>
 
@@ -23,9 +23,13 @@
         <div class="large-8">
             <pre id="log"></pre>
 
-            <div id="PlatoError" data-alert class="alert-box warning round" style="display:none;">
+            <div id="PlatoError" data-alert class="alert-box warning radius" style="display:none;">
                 <strong>There has been an error.</strong> Please see the last message.<br>
                 You can try again by reloading the page.
+            </div>
+
+            <div id="PlatoSuccess" data-alert class="alert-box success radius" style="display:none;">
+                <strong>Success!</strong> You are now being forwarded to your Plato Report.
             </div>
         </div>
     </div>
@@ -35,43 +39,11 @@
 <p><a></a><span><%= text %></span></p>
 </script>
 
-<script src="/assets/components/jquery/jquery.min.js"></script>
-<script src="/assets/components/underscore/underscore-min.js"></script>
-<script src="/assets/components/foundation/js/foundation.min.js"></script>
-<script src="/assets/js/core.js"></script>
+<script src="/components/jquery/jquery.min.js"></script>
+<script src="/components/underscore/underscore-min.js"></script>
+<script src="/components/foundation/js/foundation.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script>
-(function ($) {
-    var channelId = location.pathname.split('/').slice(1, -1).join('/'),
-        socket    = io.connect('http://localhost'),
-        $log      = $('#log'),
-        messageHandlers = {},
-        renderRow = _.template($.trim($('#LogRowTemplate').html()));
-
-    messageHandlers.log = function (message) {
-        $log.append(renderRow(message));
-        window.scrollTo(0, 1e11);
-    };
-
-    messageHandlers.ready = function (message) {
-        window.location = window.location;
-    };
-
-    messageHandlers.error = function (message) {
-        $('#PlatoError').show();
-    };
-
-    socket.on('progress', function (data) {
-        for (var i = 0, c = data.length, message; i < c; i++) {
-            message = data[i];
-            if (messageHandlers[message.type]) {
-                messageHandlers[message.type](message);
-            }
-        }
-    });
-
-    socket.emit('join', channelId);
-})(window.jQuery);
-</script>
+<script src="/assets/js/core.js"></script>
+<script src="/assets/js/progress.js"></script>
 </body>
 </html>
