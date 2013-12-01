@@ -1,20 +1,2 @@
-body {
-    border-top: 8px solid #E41F3A;
-    padding: 1em;
-}
-
-header.logo {
-    margin-bottom: 2em;
-}
-
-.muted {
-    color: #6f6f6f;
-}
-
-.callout {
-    margin-top: .8em;
-}
-
-#ProgressLog {
-
-}
+@import url(site.css);
+@import url(log.css);

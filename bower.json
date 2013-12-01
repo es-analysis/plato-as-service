@@ -3,7 +3,8 @@
   "dependencies": {
     "foundation": "~5.0.2",
     "foundation-icons": "*",
-    "jquery": "~2.0.3"
+    "jquery": "~2.0.3",
+    "underscore": "~1.5.2"
   },
   "devDependencies": {}
 }
