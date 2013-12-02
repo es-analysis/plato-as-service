@@ -1,36 +1,49 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Loading...</title>
-    </head>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Report...</title>
+
+    <link rel="stylesheet" href="/components/foundation/css/normalize.css">
+    <link rel="stylesheet" href="/components/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/assets/css/core.css">
+
+    <script src="/components/foundation/js/vendor/custom.modernizr.js"></script>
+</head>
 <body>
-<pre id="log"></pre>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-(function (){
-    var channelId = location.pathname.split('/').slice(1, -1).join('/');
-    var socket = io.connect('http://localhost');
-    var log = document.getElementById('log');
-    socket.on('progress', function (data) {
-        for (var i = 0, c = data.length, message; i < c; i++) {
-            message = data[i];
-            switch (message.type) {
-                case 'log':
-                    log.innerHTML += message.text + '\n';
-                    // follow log
-                    window.scrollTo(0, 1e11);
-                    break;
-                case 'ready':
-                    window.location = window.location;
-                    break;
-                case 'error':
-                    log.innerHTML += 'Please, report error above. You may also <a href="' + location + '">retry</a>' + '\n';
-                    break;
-            }
-        }
-    });
-    socket.emit('join', channelId);
-})();
+
+<section role="main">
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Processing Repository&hellip;</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-8">
+            <pre id="log"></pre>
+
+            <div id="PlatoError" data-alert class="alert-box warning radius" style="display:none;">
+                <strong>There has been an error.</strong> Please see the last message.<br>
+                You can try again by reloading the page.
+            </div>
+
+            <div id="PlatoSuccess" data-alert class="alert-box success radius" style="display:none;">
+                <strong>Success!</strong> You are now being forwarded to your Plato Report.
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/template" id="LogRowTemplate">
+<p><a></a><span><%= text %></span></p>
 </script>
+
+<script src="/components/jquery/jquery.min.js"></script>
+<script src="/components/underscore/underscore-min.js"></script>
+<script src="/components/foundation/js/foundation.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/assets/js/core.js"></script>
+<script src="/assets/js/progress.js"></script>
 </body>
 </html>

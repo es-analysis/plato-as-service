@@ -1,50 +1,63 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Plato as service</title>
-    </head>
-    <style type="text/css">
-        html, body {
-            height: 100%;
-            text-align: center;
-            margin: 0;
-        }
-        ul {
-            display: inline-block;
-            vertical-align: middle;
-            text-align: left;
-            margin: 0;
-        }
-        i {
-            display: inline-block;
-            width: 0;
-            height: 100%;
-            vertical-align: middle;
-        }
-    </style>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlatoJS Services</title>
+
+    <link rel="stylesheet" href="/components/foundation/css/normalize.css">
+    <link rel="stylesheet" href="/components/foundation/css/foundation.css">
+    <link rel="stylesheet" href="/assets/css/core.css">
+
+    <script src="/components/foundation/js/vendor/custom.modernizr.js"></script>
+</head>
 <body>
-    <ul>
-        <li>
-<pre>
-Plato report /%github-user%/%repo%/%branch%/
-Example <a href="/azproduction/plato-as-service/master/">/azproduction/plato-as-service/master/</a>
-</pre>
-        </li>
-        <li>
-<pre>
-Maintainability badge /%github-user%/%repo%/%branch%/maintainability.png
-Example <a href="/azproduction/plato-as-service/master/maintainability.png">/azproduction/plato-as-service/master/maintainability.png</a>
-<img src="/azproduction/plato-as-service/master/maintainability.png"/>
-</pre>
-        </li>
-        <li>
-<pre>
-Sloc badge /%github-user%/%repo%/%branch%/sloc.png
-Example <a href="/azproduction/plato-as-service/master/sloc.png">/azproduction/plato-as-service/master/sloc.png</a>
-<img src="/azproduction/plato-as-service/master/sloc.png"/>
-</pre>
-        </li>
-    </ul>
-    <i></i>
+
+<header class="logo">
+    <div class="row">
+        <div class="large-6 columns">
+            <h1>PlatoJS Services</h1>
+            <p class="muted">JavaScript source code visualization, static analysis, and complexity tools.</p>
+        </div>
+        <div class="large-6 columns">
+            <blockquote>“Quality is never an accident; it is always the result of intelligent effort.” <cite>John Ruskin</cite></blockquote>
+        </div>
+    </div>
+</header>
+
+<section role="main">
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Plato Reports</h3>
+            <code>/%github-user%/%repo%/%branch%/</code>
+            <p>Example <a href="/azproduction/plato-as-service/master/">/azproduction/plato-as-service/master/</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Maintainability Badge</h3>
+            <code>/%github-user%/%repo%/%branch%/maintainability.png</code><br>
+            <p>
+                Example <a href="/azproduction/plato-as-service/master/maintainability.png">/azproduction/plato-as-service/master/maintainability.png</a><br>
+                <img src="/azproduction/plato-as-service/master/maintainability.png"/>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <h3>Sloc Badge</h3>
+            <code>/%github-user%/%repo%/%branch%/sloc.png</code><br>
+            <p>
+                Example <a href="/azproduction/plato-as-service/master/sloc.png">/azproduction/plato-as-service/master/sloc.png</a><br>
+                <img src="/azproduction/plato-as-service/master/sloc.png"/>
+            </p>
+        </div>
+    </div>
+</section>
+
+<script src="/components/jquery/jquery.min.js"></script>
+<script src="/components/underscore/underscore-min.js"></script>
+<script src="/components/foundation/js/foundation.min.js"></script>
+<script src="/assets/js/core.js"></script>
 </body>
 </html>

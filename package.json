@@ -44,6 +44,7 @@
         "coveralls": "*"
     },
     "scripts": {
+        "postinstall": "bower install",
         "test" : "make validate",
         "lint": "make lint",
         "coverage": "make coverage",
