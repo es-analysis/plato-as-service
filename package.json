@@ -46,6 +46,8 @@
         "chai": "*",
         "mocha-istanbul": "*",
         "coveralls": "*",
+        "supertest": "*",
+
         "bower": "*",
         "grunt": "*",
         "grunt-cli": "*",

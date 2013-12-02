@@ -23,20 +23,20 @@ var express = require('express'),
 module.exports = function (reportSettings) {
     var app = express();
 
-    var server = require('http').createServer(app),
-        io = require('socket.io').listen(server);
+    var server = require('http').createServer(app);
+
+    var io = require('socket.io').listen(server, {
+        log: app.get('env') === 'development'
+    });
 
     app.locals({
         reportSettings: reportSettings,
         requestQueue: new Limiter(reportSettings.maxConcurrent, reportSettings.maxConcurrentQueue)
     });
 
-    app.configure(function () {
-        app.use(express.logger('dev'));
-    });
-
     app.configure('development', function(){
         app.use(express.errorHandler());
+        app.use(express.logger('dev'));
     });
 
     router(app, io);
