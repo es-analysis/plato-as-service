@@ -14,9 +14,7 @@ module.exports = function (app, io) {
     app.get('/:user/:repo/:branch/:badge.png', indexController.badgeCreate);
 
     // Bower Components and static documents
-    app.get('/assets/*', express.static(__dirname + '/../public/'));
-    app.get('/components/*', express.static(__dirname + '/../public/'));
-    app.get('/favicon.ico', express.static(__dirname + '/../public/assets/favicon/'));
+    app.get('/*', express.static(__dirname + '/../www/'));
 
     // Static
     app.get('*', express.static(app.locals.reportSettings.reports || __dirname + '/../reports'));

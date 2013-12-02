@@ -2,11 +2,15 @@
     "author" : "Mikhail Davydov <i@azproduction.ru>",
     "description" : "Web-Service for plato - JavaScript source code visualization, static analysis, and complexity tool",
     "name" : "plato-as-service",
-    "version" : "0.1.5",
+    "version" : "0.2.1",
     "contributors" : [
         {
             "name": "Mikhail Davydov",
             "email": "i@azproduction.ru"
+        },
+        {
+            "name": "Craig Davis",
+            "email": "craig@there4development.com"
         }
     ],
     "engines" : {
@@ -41,10 +45,18 @@
         "istanbul": "0.1.39",
         "chai": "*",
         "mocha-istanbul": "*",
-        "coveralls": "*"
+        "coveralls": "*",
+        "bower": "*",
+        "grunt": "*",
+        "grunt-cli": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-csso": "*",
+        "grunt-concurrent": "*",
+        "load-grunt-tasks": "*"
     },
     "scripts": {
-        "postinstall": "bower install",
+        "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/grunt",
         "test" : "make validate",
         "lint": "make lint",
         "coverage": "make coverage",

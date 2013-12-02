@@ -5,4 +5,5 @@ lib-cov
 coverage.html
 html-report
 reports
-components
+static/vendors
+www/_*

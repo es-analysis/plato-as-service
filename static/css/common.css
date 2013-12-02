@@ -1,5 +1,3 @@
-
-
 body {
     border-top: 8px solid #E41F3A;
     padding: 1em;
@@ -15,8 +13,4 @@ header.logo {
 
 .callout {
     margin-top: .8em;
-}
-
-#ProgressLog {
-
 }

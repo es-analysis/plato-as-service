@@ -2,7 +2,9 @@
     "excludeFiles": [
         ".git/**",
         "node_modules/**",
-        "reports/**"
+        "reports/**",
+        "static/vendors/**",
+        "www/**"
     ],
 
     "requireCurlyBraces": ["if", "else", "for", "while", "do"],

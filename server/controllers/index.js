@@ -115,7 +115,7 @@ exports.badgeCreate = function (req, res, next) {
 };
 
 exports.redirectToMaster = function (req, res) {
-    var router = req.params.badge? serviceBadgeRoute : serviceRoute;
+    var router = req.params.badge ? serviceBadgeRoute : serviceRoute;
     res.redirect(router.build(req.params));
 };
 
@@ -138,4 +138,3 @@ exports.streamLog = function (socket) {
         messages.addListener(channelId, forwardMessages);
     });
 };
-

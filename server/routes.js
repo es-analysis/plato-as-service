@@ -13,4 +13,3 @@ exports.serviceBadgeRoute = new Route({
         branch: 'master'
     }
 });
-

@@ -1,0 +1,56 @@
+.progress-logger {
+    position: relative;
+    clear: left;
+    min-height: 12px;
+    margin-top: 1em;
+    color: #f1f1f1;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 19px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #222;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    counter-reset: line-numbering;
+    padding: 15px 0;
+    margin-bottom: 15px;
+}
+
+.progress-logger .cut {
+    padding: 20px 15px 0 55px;
+}
+
+.progress-logger p {
+    min-height: 16px;
+    margin: 0;
+    padding: 0 15px 0 55px;
+    font-size: 12px;
+}
+
+.progress-logger p:hover {
+    background-color: #444 !important;
+}
+
+.progress-logger p.highlight {
+    background-color: #666;
+}
+
+.progress-logger p.highlight a {
+    color: #fff;
+}
+
+.progress-logger p a {
+    display: inline-block;
+    text-align: right;
+    min-width: 40px;
+    margin-left: -33px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.progress-logger p a::before {
+    content: counter(line-numbering);
+    counter-increment: line-numbering;
+    padding-right: 1em;
+}
