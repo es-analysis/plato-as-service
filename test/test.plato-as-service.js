@@ -14,7 +14,7 @@ describe('plato-as-service', function () {
 
     beforeEach(function () {
         app = server({
-            hostname: 'github.com',
+            apiHostname: 'api.github.com',
             badgeService: 'img.shields.io',
             maxConcurrent: 50,
             maxConcurrentQueue: Infinity,

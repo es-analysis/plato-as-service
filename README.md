@@ -20,7 +20,7 @@ npm install plato-as-service
 var server = require('plato-as-service');
 
 server({
-    hostname: 'github.com',
+    apiHostname: 'api.github.com',
     badgeService: 'img.shields.io',
     reports: __dirname + '/reports',
     maxConcurrent: 50,                // max concurrent unzip processes

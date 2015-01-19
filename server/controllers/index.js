@@ -26,7 +26,14 @@ var badgeImages = Object.keys(ReportGenerator.AVAILABLE_BADGES)
 var messages = new BufferedMessageChannel();
 
 exports.index = function (req, res, next) {
-    var reportGenerator = new ReportGenerator(res.app.locals.reportSettings, req.params),
+    var query = {
+        user: req.params.user,
+        repo: req.params.repo,
+        branch: req.params.branch,
+        oauth_token: req.query.oauth_token
+    };
+
+    var reportGenerator = new ReportGenerator(res.app.locals.reportSettings, query),
         channelId = reportGenerator.cacheKey(),
         isPending = reportGenerator.isPending(),
         requestQueue = res.app.locals.requestQueue;
