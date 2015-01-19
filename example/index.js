@@ -2,7 +2,7 @@ var server = require('../server'),
     path = require('path');
 
 server({
-    hostname: 'github.com',
+    apiHostname: 'api.github.com',
     badgeService: 'img.shields.io',
     maxConcurrent: 50,
     maxConcurrentQueue: Infinity,
